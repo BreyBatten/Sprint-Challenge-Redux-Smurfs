@@ -22,6 +22,38 @@ export const getSmurfs = () => dispatch => {
   dispatch({ type: FETCHING });
   axios
     .get("http://localhost:3333/smurfs")
-    .then(res => dispatch({ type: SUCCESS, payload: res.data }))
-    .catch(err => dispatch({ type: FAILURE, payload: err }))
+    .then(res => {
+      dispatch({
+        type: SUCCESS, 
+        payload: res.data 
+      })
+    })
+    .catch(err => {
+      dispatch({ 
+        type: FAILURE, 
+        payload: err 
+      })
+    })
+}
+
+export const POST_START = "POST_START";
+export const POST_SUCCESS = "POST_SUCCESS";
+export const POST_FAILURE = "POST_FAILURE";
+
+export const postSmurf = smurfData => dispatch => {
+  dispatch({ type: POST_START });
+
+  axios.post("http://localhost:3333/smurfs", smurfData)
+    .then(res => {
+      dispatch({ 
+        type: POST_SUCCESS,
+        payload: res.data 
+      })
+    })
+    .catch(err => {
+      dispatch({ 
+        type: POST_FAILURE,
+        payload: err 
+      })
+    })
 }

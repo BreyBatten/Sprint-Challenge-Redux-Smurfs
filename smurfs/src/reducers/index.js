@@ -1,4 +1,4 @@
-import { FETCHING, SUCCESS, FAILURE } from "../actions";
+import { FETCHING, SUCCESS, FAILURE, POST_START, POST_SUCCESS, POST_FAILURE } from "../actions";
 /*
   Be sure to import in all of the action types from `../actions`
 */
@@ -16,8 +16,12 @@ import { FETCHING, SUCCESS, FAILURE } from "../actions";
 */
 const initialState = {
   smurfs: [],
+  newId: 1,
   isFetching: false,
-  error: ""
+  isPosting: false,
+  isUpdating: false,
+  isDeleting: false,
+  error: null
 }
 
 export default (state = initialState, action) => {
@@ -26,19 +30,38 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
-        error: ""
+        error: null
       };
     case SUCCESS:
       return {
         ...state,
         isFetching: false,
-        error: "",
+        error: null,
         smurfs: action.payload
       }
     case FAILURE:
       return {
         ...state,
         isFetching: false,
+        error: action.payload
+      }
+    case POST_START:
+      return {
+        ...state,
+        isPosting: true,
+        error: null
+      }
+    case POST_SUCCESS:
+      return {
+        ...state,
+        newId: state.newId++,
+        isPosting: false,
+        error: null
+      }
+    case POST_FAILURE:
+      return {
+        ...state,
+        isPosting: false,
         error: action.payload
       }
     default:
