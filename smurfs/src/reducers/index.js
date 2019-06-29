@@ -1,3 +1,4 @@
+import { FETCHING, SUCCESS, FAILURE } from "../actions";
 /*
   Be sure to import in all of the action types from `../actions`
 */
@@ -13,6 +14,37 @@
    error: null
  }
 */
+const initialState = {
+  smurfs: [],
+  isFetching: false,
+  error: ""
+}
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case FETCHING:
+      return {
+        ...state,
+        isFetching: true,
+        error: ""
+      };
+    case SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: "",
+        smurfs: action.payload
+      }
+    case FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
+    default:
+      return state;
+  }
+}
 
 /*
   You'll only need one smurf reducer for this project.

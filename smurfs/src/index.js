@@ -9,8 +9,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
 const store = createStore(
-  rootReducer, // this is the most basic reducer. A function that returns and object. Replace it.
-  applyMiddleware(thunk, logger)
+  rootReducer, applyMiddleware(thunk, logger)
 );
 
 ReactDOM.render(
