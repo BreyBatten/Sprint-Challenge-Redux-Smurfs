@@ -25,7 +25,7 @@ class SmurfForm extends React.Component {
         this.props.postSmurf({
             name: this.state.newName,
             age: this.state.newAge,
-            height: this.state.newHeight,
+            height: this.state.newHeight + 'cm',
             id: this.props.newId
         })
     }
